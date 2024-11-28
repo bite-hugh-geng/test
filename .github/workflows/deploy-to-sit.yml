@@ -17,8 +17,8 @@ on:
           - major
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # This workflow contains a single job called "deploy"
+  build-to-deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
