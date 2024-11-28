@@ -17,6 +17,27 @@ on:
           - major
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  get-some-vars:
+    runs-on: ubuntu-latest
+    name: Get some variable values
+    outputs:
+      project_name: ${{ steps.get_some_vars.outputs.project_name }}
+      release_number: ${{ steps.get_some_vars.outputs.release_number }}
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: |
+          echo "GITHUB_CONTEXT is: $GITHUB_CONTEXT"
+
+      - id: get_some_vars
+        run: |
+          release_number=$(echo ${{ github.ref }} | cut -d '/' -f 4)
+          project_name=$(echo ${{ github.repository }} | awk -F '/' '{print $2}')
+          echo "project_name=$project_name" >> $GITHUB_OUTPUT
+          echo "release_number=$release_number" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
+
   # This workflow contains a single job called "deploy"
   build-to-deploy:
     # The type of runner that the job will run on
