@@ -1,7 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
 name: Deploy to Sit
-run-name: ${{ github.actor }} is deploying ${{ github.repository }} to SIT 🚀
+run-name: ${{ github.actor }} is deploying ${{ github.repository }} to SIT ${{ github.event.inputs.version }} 🚀
 
 # Controls when the workflow will run
 on:
